@@ -9,6 +9,8 @@ import {
   BackButton,
 } from "./home.styles";
 
+import LineupPreview from "../../components/lineup-preview/lineup-preview.components";
+
 import data from "../../data.js";
 
 const teams = ["defending", "attacking"];
@@ -23,7 +25,7 @@ function HomePage() {
 
   let heading = "";
 
-  if (team == null) heading = "I am...";
+  if (team == null) heading = "I Am...";
   else if (map == null) heading = "On...";
   else if (route == null) heading = "From...";
 
@@ -77,9 +79,15 @@ function HomePage() {
         </span>
 
         {treeComplete ? (
-          <h1>
-            team: {team}, map: {map}, route: {route}
-          </h1>
+          data[team][map][route].map((lineup) => {
+            return (
+              <LineupPreview
+                title={lineup["title"]}
+                description={lineup["info"].substr(0, 50) + "..."}
+                imageURL={lineup["image1"]}
+              />
+            );
+          })
         ) : (
           <ButtonsContainer>{generateButtons()}</ButtonsContainer>
         )}
