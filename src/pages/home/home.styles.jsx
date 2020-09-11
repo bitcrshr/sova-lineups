@@ -59,3 +59,14 @@ export const ButtonsContainer = styled.div`
 export const StyledButton = styled.button`
   ${ButtonStyles}
 `;
+
+export const BackButton = styled.i.attrs((props) => ({
+  className: "fas fa-arrow-left fa-2x",
+}))`
+  color: white;
+  padding: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
