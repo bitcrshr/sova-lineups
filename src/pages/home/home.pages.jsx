@@ -19,15 +19,13 @@ function HomePage({ match }) {
   const team = match["params"]["team"];
   const map = match["params"]["map"];
   const route = match["params"]["route"];
-  const treeComplete =
-    team !== undefined && map !== undefined && route !== undefined;
 
   let heading = "";
 
-  if (team === undefined) heading = "I Am...";
-  else if (map === undefined) heading = "On...";
-  else if (route === undefined) heading = "From...";
-  else heading = (team + " on " + map + " from " + route).toUpperCase();
+  if (team === undefined) heading = "I AM...";
+  else if (map === undefined) heading = "ON...";
+  else if (route === undefined) heading = "FROM...";
+  else heading = (map + ": " + team + " from " + route).toUpperCase();
 
   const history = useHistory();
   const location = useLocation();
@@ -81,7 +79,7 @@ function HomePage({ match }) {
         {team !== undefined && (
           <BackButton onClick={() => onBackButtonClick()} /> // don't show back button on first page
         )}
-        <BigText noValFont={treeComplete}>{heading}</BigText>
+        <BigText noValFont>{heading}</BigText>
 
         {route === undefined ? (
           <ButtonsContainer>{generateButtons()}</ButtonsContainer>

@@ -36,7 +36,7 @@ export const PageContainer = styled.div``;
 
 export const BigText = styled.h1`
   font-family: ${(props) => (props.noValFont ? "Oswald" : "Valorant")};
-  font-size: ${(props) => (props.noValFont ? "30px" : "48px")};
+  font-size: 48px;
   color: ${(props) => (props.noValFont ? "white" : "#dc3d4b")};
   ${(props) => (props.noValFont ? "" : FontBorderStyles)};
   text-align: center;
