@@ -73,6 +73,16 @@ function HomePage() {
     return data[team][map][route].map((lineup) => {
       return (
         <LineupPreview
+          to={
+            "/" +
+            team +
+            "/" +
+            map +
+            "/" +
+            route +
+            "/" +
+            lineup["title"].toLowerCase()
+          }
           title={lineup["title"]}
           description={lineup["info"].substr(0, 50) + "..."}
           imageURL={lineup["image1"]}

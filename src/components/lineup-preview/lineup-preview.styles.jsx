@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+import { Link } from "react-router-dom";
+
+export const Container = styled(Link)`
   width: 500px;
   height: 100px;
   background-color: white;
   margin-bottom: 15px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+  overflow: hidden;
 `;
 
 export const Title = styled.h2`
