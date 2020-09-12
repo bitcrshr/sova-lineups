@@ -80,3 +80,9 @@ export const LineupPreviewsContainer = styled.div`
   flex-direction: column;
   margin: 0 auto;
 `;
+
+export const LineupDetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+`;
