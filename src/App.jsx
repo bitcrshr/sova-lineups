@@ -10,8 +10,11 @@ function App(props) {
     <div>
       <GlobalFonts />
       <Switch>
+        <Route path="/:team/:map/:route/:lineupID" component={HomePage} />.
+        <Route path="/:team/:map/:route" component={HomePage} />
+        <Route path="/:team/:map" component={HomePage} />
+        <Route path="/:team/" component={HomePage} />
         <Route exact path="/" component={HomePage} />
-        <Route path="/:lineupID" component={HomePage} />
       </Switch>
     </div>
   );

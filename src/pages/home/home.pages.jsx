@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
 import {
   PageContainer,
@@ -17,54 +17,50 @@ import LineupPreview from "../../components/lineup-preview/lineup-preview.compon
 import data from "../../data.js";
 
 function HomePage({ match }) {
-  const [team, setTeam] = useState(null);
-  const [map, setMap] = useState(null);
-  const [route, setRoute] = useState(null);
-  const [treeComplete, setTreeComplete] = useState(false);
+  const team = match["params"]["team"];
+  const map = match["params"]["map"];
+  const route = match["params"]["route"];
+  const treeComplete =
+    team !== undefined && map !== undefined && route !== undefined;
+  const lineup = match["params"]["lineupID"];
 
   let heading = "";
-  let hasMatch = match.params["lineupID"] !== undefined;
 
-  if (team == null) heading = "I Am...";
-  else if (map == null) heading = "On...";
-  else if (route == null) heading = "From...";
+  if (team === undefined) heading = "I Am...";
+  else if (map === undefined) heading = "On...";
+  else if (route === undefined) heading = "From...";
   else heading = (team + " on " + map + " from " + route).toUpperCase();
 
   const history = useHistory();
+  const location = useLocation();
 
   const onTeamButtonClick = (key) => {
-    setTeam(key);
+    history.push("/" + key);
   };
   const onMapButtonClick = (key) => {
-    setMap(key);
+    history.push(location["pathname"] + "/" + key);
   };
   const onRouteButtonClick = (key) => {
-    setRoute(key);
+    history.push(location["pathname"] + "/" + key);
   };
   const onBackButtonClick = () => {
-    if (hasMatch) {
-      history.replace("/");
-    }
-    if (treeComplete) setTreeComplete(false);
-    if (route) setRoute(null);
-    else if (map) setMap(null);
-    else if (team) setTeam(null);
+    history.goBack();
   };
 
   const generateButtons = () => {
-    if (team == null) {
+    if (team === undefined) {
       return Object.keys(data).map((t) => (
         <StyledButton key={t} onClick={() => onTeamButtonClick(t)}>
           {t.toUpperCase()}
         </StyledButton>
       ));
-    } else if (map == null) {
+    } else if (map === undefined) {
       return Object.keys(data[team]).map((m) => (
         <StyledButton key={m} onClick={() => onMapButtonClick(m)}>
           {m.toUpperCase()}
         </StyledButton>
       ));
-    } else if (route == null) {
+    } else if (route === undefined) {
       return Object.keys(data[team][map]).map((r) =>
         data[team][map][r].length > 0 ? ( // only render button if it has lineups for that route
           <StyledButton key={r} onClick={() => onRouteButtonClick(r)}>
@@ -73,7 +69,7 @@ function HomePage({ match }) {
         ) : null
       );
     } else {
-      setTreeComplete(true);
+      // do nothin
     }
   };
 
@@ -87,24 +83,28 @@ function HomePage({ match }) {
     return <h1>owow</h1>;
   };
 
+  console.log("num of /s: " + location["pathname"].match("/").length);
+
   return (
     <PageContainer>
       <MainContainer>
         <span>
-          {team && <BackButton onClick={() => onBackButtonClick()} />}
+          {team !== undefined && (
+            <BackButton onClick={() => onBackButtonClick()} />
+          )}
           <BigText noValFont={treeComplete}>{heading}</BigText>
         </span>
 
-        {hasMatch ? (
-          <LineupDetailsContainer>
-            {populateLineupDetails()}
-          </LineupDetailsContainer>
-        ) : treeComplete ? (
+        {route === undefined ? (
+          <ButtonsContainer>{generateButtons()}</ButtonsContainer>
+        ) : lineup === undefined ? (
           <LineupPreviewsContainer>
             {generateLineupPreviews()}
           </LineupPreviewsContainer>
         ) : (
-          <ButtonsContainer>{generateButtons()}</ButtonsContainer>
+          <LineupDetailsContainer>
+            {populateLineupDetails()}
+          </LineupDetailsContainer>
         )}
       </MainContainer>
     </PageContainer>
