@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 500px;
   height: 100px;
   background-color: white;
-  margin: 0 auto;
+  margin-bottom: 15px;
 `;
 
 export const Title = styled.h2`

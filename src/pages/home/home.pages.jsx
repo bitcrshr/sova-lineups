@@ -7,15 +7,12 @@ import {
   StyledButton,
   ButtonsContainer,
   BackButton,
+  LineupPreviewsContainer,
 } from "./home.styles";
 
 import LineupPreview from "../../components/lineup-preview/lineup-preview.components";
 
 import data from "../../data.js";
-
-const teams = ["defending", "attacking"];
-const maps = ["bind", "split", "haven", "ascent"];
-const routes = ["a", "b", "c", "mid"];
 
 function HomePage() {
   const [team, setTeam] = useState(null);
@@ -28,6 +25,7 @@ function HomePage() {
   if (team == null) heading = "I Am...";
   else if (map == null) heading = "On...";
   else if (route == null) heading = "From...";
+  else heading = (team + " on " + map + " from " + route).toUpperCase();
 
   const onTeamButtonClick = (key) => {
     setTeam(key);
@@ -59,15 +57,28 @@ function HomePage() {
         </StyledButton>
       ));
     } else if (route == null) {
-      return Object.keys(data[team][map]).map((r) => (
-        <StyledButton key={r} onClick={() => onRouteButtonClick(r)}>
-          {r.toUpperCase()}
-        </StyledButton>
-      ));
+      return Object.keys(data[team][map]).map((r) =>
+        data[team][map][r].length > 0 ? ( // only render button if it has lineups for that route
+          <StyledButton key={r} onClick={() => onRouteButtonClick(r)}>
+            {r.toUpperCase()}
+          </StyledButton>
+        ) : null
+      );
     } else {
       setTreeComplete(true);
-      console.log(data[team][map][route][0]);
     }
+  };
+
+  const generateLineupPreviews = () => {
+    return data[team][map][route].map((lineup) => {
+      return (
+        <LineupPreview
+          title={lineup["title"]}
+          description={lineup["info"].substr(0, 50) + "..."}
+          imageURL={lineup["image1"]}
+        />
+      );
+    });
   };
 
   return (
@@ -75,19 +86,13 @@ function HomePage() {
       <MainContainer>
         <span>
           {team && <BackButton onClick={() => onBackButtonClick()} />}
-          <BigText>{heading}</BigText>
+          <BigText noValFont={treeComplete}>{heading}</BigText>
         </span>
 
         {treeComplete ? (
-          data[team][map][route].map((lineup) => {
-            return (
-              <LineupPreview
-                title={lineup["title"]}
-                description={lineup["info"].substr(0, 50) + "..."}
-                imageURL={lineup["image1"]}
-              />
-            );
-          })
+          <LineupPreviewsContainer>
+            {generateLineupPreviews()}
+          </LineupPreviewsContainer>
         ) : (
           <ButtonsContainer>{generateButtons()}</ButtonsContainer>
         )}

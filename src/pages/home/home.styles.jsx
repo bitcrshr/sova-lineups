@@ -27,14 +27,18 @@ const CenteredStyles = css`
   transform: translate(-50%, -50%);
 `;
 
+const FontBorderStyles = css`
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: white;
+`;
+
 export const PageContainer = styled.div``;
 
 export const BigText = styled.h1`
-  font-family: "Valorant";
-  font-size: 48px;
-  color: #dc3d4b;
-  -webkit-text-stroke-width: 0.1px;
-  -webkit-text-stroke-color: white;
+  font-family: ${(props) => (props.noValFont ? "Oswald" : "Valorant")};
+  font-size: ${(props) => (props.noValFont ? "30px" : "48px")};
+  color: ${(props) => (props.noValFont ? "white" : "#dc3d4b")};
+  ${(props) => (props.noValFont ? "" : FontBorderStyles)};
   text-align: center;
 `;
 
@@ -69,4 +73,10 @@ export const BackButton = styled.i.attrs((props) => ({
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const LineupPreviewsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 `;
