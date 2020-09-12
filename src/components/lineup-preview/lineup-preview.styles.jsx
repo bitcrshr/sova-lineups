@@ -1,12 +1,17 @@
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
+export const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`;
+
 export const Container = styled.div`
   width: 500px;
   height: 100px;
   background-color: white;
   margin-bottom: 15px;
-  text-decoration: none;
-
   cursor: pointer;
 
   overflow: hidden;

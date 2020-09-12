@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import {
   PageContainer,
@@ -8,24 +9,28 @@ import {
   ButtonsContainer,
   BackButton,
   LineupPreviewsContainer,
+  LineupDetailsContainer,
 } from "./home.styles";
 
 import LineupPreview from "../../components/lineup-preview/lineup-preview.components";
 
 import data from "../../data.js";
 
-function HomePage() {
+function HomePage({ match }) {
   const [team, setTeam] = useState(null);
   const [map, setMap] = useState(null);
   const [route, setRoute] = useState(null);
   const [treeComplete, setTreeComplete] = useState(false);
 
   let heading = "";
+  let hasMatch = match.params["lineupID"] !== undefined;
 
   if (team == null) heading = "I Am...";
   else if (map == null) heading = "On...";
   else if (route == null) heading = "From...";
   else heading = (team + " on " + map + " from " + route).toUpperCase();
+
+  const history = useHistory();
 
   const onTeamButtonClick = (key) => {
     setTeam(key);
@@ -37,6 +42,9 @@ function HomePage() {
     setRoute(key);
   };
   const onBackButtonClick = () => {
+    if (hasMatch) {
+      history.replace("/");
+    }
     if (treeComplete) setTreeComplete(false);
     if (route) setRoute(null);
     else if (map) setMap(null);
@@ -71,24 +79,12 @@ function HomePage() {
 
   const generateLineupPreviews = () => {
     return data[team][map][route].map((lineup) => {
-      return (
-        <LineupPreview
-          to={
-            "/" +
-            team +
-            "/" +
-            map +
-            "/" +
-            route +
-            "/" +
-            lineup["title"].toLowerCase()
-          }
-          title={lineup["title"]}
-          description={lineup["info"].substr(0, 50) + "..."}
-          imageURL={lineup["image1"]}
-        />
-      );
+      return <LineupPreview key={lineup["title"]} lineup={lineup} />;
     });
+  };
+
+  const populateLineupDetails = () => {
+    return <h1>owow</h1>;
   };
 
   return (
@@ -99,7 +95,11 @@ function HomePage() {
           <BigText noValFont={treeComplete}>{heading}</BigText>
         </span>
 
-        {treeComplete ? (
+        {hasMatch ? (
+          <LineupDetailsContainer>
+            {populateLineupDetails()}
+          </LineupDetailsContainer>
+        ) : treeComplete ? (
           <LineupPreviewsContainer>
             {generateLineupPreviews()}
           </LineupPreviewsContainer>

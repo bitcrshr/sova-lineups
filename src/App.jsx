@@ -11,6 +11,7 @@ function App(props) {
       <GlobalFonts />
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route path="/:lineupID" component={HomePage} />
       </Switch>
     </div>
   );

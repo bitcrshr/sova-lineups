@@ -5,14 +5,19 @@ import {
   Title,
   Description,
   BackgroundImage,
+  StyledLink,
 } from "./lineup-preview.styles";
 
-const LineupPreview = ({ title, description, imageURL, onClick }, ...props) => (
-  <Container onClick={onClick}>
-    <Title>{title}</Title>
-    <Description>{description}</Description>
-    <BackgroundImage src={imageURL} />
-  </Container>
-);
+function LineupPreview({ lineup }) {
+  return (
+    <StyledLink to={"/" + lineup["title"]}>
+      <Container>
+        <Title>{lineup["title"]}</Title>
+        <Description>{lineup["info"].substr(0, 50).trim() + "..."}</Description>
+        <BackgroundImage src={lineup["image1"]} />
+      </Container>
+    </StyledLink>
+  );
+}
 
 export default LineupPreview;
