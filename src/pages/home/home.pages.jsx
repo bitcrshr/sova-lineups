@@ -9,7 +9,6 @@ import {
   ButtonsContainer,
   BackButton,
   LineupPreviewsContainer,
-  LineupDetailsContainer,
 } from "./home.styles";
 
 import LineupPreview from "../../components/lineup-preview/lineup-preview.components";
@@ -22,7 +21,6 @@ function HomePage({ match }) {
   const route = match["params"]["route"];
   const treeComplete =
     team !== undefined && map !== undefined && route !== undefined;
-  const lineup = match["params"]["lineupID"];
 
   let heading = "";
 
@@ -68,8 +66,6 @@ function HomePage({ match }) {
           </StyledButton>
         ) : null
       );
-    } else {
-      // do nothin
     }
   };
 
@@ -79,32 +75,20 @@ function HomePage({ match }) {
     });
   };
 
-  const populateLineupDetails = () => {
-    return <h1>owow</h1>;
-  };
-
-  console.log("num of /s: " + location["pathname"].match("/").length);
-
   return (
     <PageContainer>
       <MainContainer>
-        <span>
-          {team !== undefined && (
-            <BackButton onClick={() => onBackButtonClick()} />
-          )}
-          <BigText noValFont={treeComplete}>{heading}</BigText>
-        </span>
+        {team !== undefined && (
+          <BackButton onClick={() => onBackButtonClick()} /> // don't show back button on first page
+        )}
+        <BigText noValFont={treeComplete}>{heading}</BigText>
 
         {route === undefined ? (
           <ButtonsContainer>{generateButtons()}</ButtonsContainer>
-        ) : lineup === undefined ? (
+        ) : (
           <LineupPreviewsContainer>
             {generateLineupPreviews()}
           </LineupPreviewsContainer>
-        ) : (
-          <LineupDetailsContainer>
-            {populateLineupDetails()}
-          </LineupDetailsContainer>
         )}
       </MainContainer>
     </PageContainer>

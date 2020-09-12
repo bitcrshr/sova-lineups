@@ -79,6 +79,29 @@ export const LineupPreviewsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  height: 50vh;
+  overflow-y: auto;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 export const LineupDetailsContainer = styled.div`
