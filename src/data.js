@@ -146,7 +146,7 @@ const data = {
       b: [
         {
           id: 6,
-          title: "B main/B lobby from B site",
+          title: "B main\\B lobby from B site",
           isActive: false,
           difficulty: "Medium",
           side: "Defending",
@@ -182,7 +182,7 @@ const data = {
       mid: [
         {
           id: 7,
-          title: "Ramen/bottom mid from mail",
+          title: "Ramen\\bottom mid from mail",
           isActive: false,
           difficulty: "Easy",
           side: "Defending",
@@ -199,7 +199,7 @@ const data = {
         },
         {
           id: 11,
-          title: "Ramen/bottom middle from mid vents",
+          title: "Ramen\\bottom middle from mid vents",
           isActive: false,
           difficulty: "Easy",
           side: "Defending",
@@ -220,7 +220,7 @@ const data = {
       a: [
         {
           id: 9,
-          title: "A lobby/garden from A tunnel/A site",
+          title: "A lobbygarden from A tunnel\\A site",
           isActive: false,
           difficulty: "Hard",
           side: "Defending",
@@ -308,7 +308,7 @@ const data = {
         },
         {
           id: 6,
-          title: "C long/C Lobby from C site",
+          title: "C long\\C Lobby from C site",
           isActive: false,
           difficulty: "Medium",
           side: "Defending",
@@ -380,7 +380,7 @@ const data = {
       a: [
         {
           id: 9,
-          title: "A lobby/top mid from A site",
+          title: "A lobby\\top mid from A site",
           isActive: false,
           difficulty: "Hard",
           side: "Defending",
@@ -415,7 +415,7 @@ const data = {
       b: [
         {
           id: 1,
-          title: "B lobby/b main from B site",
+          title: "B lobby \\ b main from B site",
           isActive: true,
           difficulty: "Easy",
           side: "Defending",
@@ -492,7 +492,7 @@ const data = {
       a: [
         {
           id: 6,
-          title: "Lamps/U hall from A lobby",
+          title: "Lamps\\U hall from A lobby",
           isActive: false,
           difficulty: "Hard",
           side: "Attacking",
@@ -759,7 +759,7 @@ const data = {
         },
         {
           id: 4,
-          title: "A site/heaven from A lobby",
+          title: "A site\\heaven from A lobby",
           isActive: false,
           difficulty: "Hard",
           side: "Attacking",
@@ -793,7 +793,7 @@ const data = {
         },
         {
           id: 16,
-          title: "A site/heaven from A long",
+          title: "A site\\heaven from A long",
           isActive: false,
           difficulty: "Medium",
           side: "Attacking",
@@ -970,7 +970,7 @@ const data = {
       mid: [
         {
           id: 5,
-          title: "Pizza/Mid bottom from mid top",
+          title: "Pizza\\Mid bottom from mid top",
           isActive: false,
           difficulty: "Hard",
           side: "Attacking",
@@ -986,7 +986,7 @@ const data = {
         },
         {
           id: 10,
-          title: "Pizza/mid bottom from mid top",
+          title: "Pizza\\mid bottom from mid top",
           isActive: false,
           difficulty: "Medium",
           side: "Attacking",
